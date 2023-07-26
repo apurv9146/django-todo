@@ -50,7 +50,12 @@ steps:
     pushd '$(projectRoot)'
     python manage.py test --testrunner xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
   displayName: 'Run tests'
-
+- script: |
+    python -m venv venv
+    source venv/bin/activate
+    pip install --upgrade pip
+    pip install -r requirements.txt
+  displayName: 'Install Python dependencies'
 - task: PublishTestResults@2
   inputs:
     testResultsFiles: "**/TEST-*.xml"
