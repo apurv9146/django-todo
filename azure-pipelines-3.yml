@@ -61,3 +61,9 @@ steps:
     testResultsFiles: "**/TEST-*.xml"
     testRunTitle: 'Python $(PYTHON_VERSION)'
   condition: succeededOrFailed()
+- task: SnykSecurityScan@1
+  inputs:
+    serviceConnectionEndpoint: 'SNYK'
+    testType: 'app'
+    monitorWhen: 'always'
+    failOnIssues: true
